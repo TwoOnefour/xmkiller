@@ -5,7 +5,8 @@
 
 import requests
 from main import *
-
+from urllib3 import disable_warnings
+disable_warnings()
 
 def getcode():
     wx = WeChatApi(appid='wx014a3b75852905fe')

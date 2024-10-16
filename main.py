@@ -23,6 +23,7 @@ class Frida_Server(DataStore):
             self.device = frida.get_usb_device()
         except frida.InvalidArgumentError:
             os.system('adb connect 192.168.50.171:16384')
+            time.sleep(1)
 
         self.device = frida.get_usb_device()
         AppBrandUI_pid = tools.get_pid(self.device.id, 'com.tencent.mm/.plugin.appbrand.ui.AppBrandUI')
