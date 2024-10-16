@@ -8,7 +8,7 @@ from loguru import logger
 import tools
 from tools.asyncRequestQueue import DataStore
 import os
-
+from Checkout import *
 class Frida_Server(DataStore):
 
     def __init__(self):
@@ -51,12 +51,15 @@ class Frida_Server(DataStore):
         if message['type'] == 'send':
             payload = json.loads(message['payload'])
             if payload['type'] == 'requests':
-                logger.debug(f'{payload}')
+                # logger.debug(f'{payload}')
+                pass
             else:
-                logger.success(f'{payload}')
+                #logger.success(f'{payload}')
+                pass
                 self.put(key=f'{payload["AppId"]}{payload["asyncRequestCounter"]}', value=payload)
         else:
-            logger.error(f'{message}')
+            #logger.error(f'{message}')
+            pass
 
     def CallWX(self, appid, api_name, data):
         Appid_asyncRequestCounter = self.script.exports.call(appid, api_name, data)
@@ -102,5 +105,5 @@ class WeChatApi(Frida_Server):
 
 
 if __name__ == '__main__':
-    from Checkout import *
-    checkout()
+
+    Checkout().run()

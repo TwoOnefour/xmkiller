@@ -14,17 +14,20 @@
 - 安装库
 > pip install -r requirements.txt
 
+- wx版本
+>wxapk==8.0.49
+
+- 一个能开adb的手机（推荐mumu模拟器）
 
 # Usage
 ## Parameter
 要自动签到，首先你得修改main.py中的相关参数,如下
-- GetCode方法中的`appid`
-- service_record中传递的参数，修改为你想要的
-
-## 运行
+- Checkout.py里GetCode方法中的`appid`
+- Checkout.py里service_record，这是传递的打卡项目的参数，修改为你想要的
+- 手机连接电脑或者打开mumu模拟器的adb，在main.py中修改ip和端口
+## Run
 ```
 .\.venv\Scripts\activate
-frida -UF -l .\Hook_WeChat_FaaS.js
 python main.py
 ```
 
