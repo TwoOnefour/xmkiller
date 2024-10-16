@@ -7,7 +7,7 @@ from loguru import logger
 
 import tools
 from tools.asyncRequestQueue import DataStore
-
+import os
 
 class Frida_Server(DataStore):
 
@@ -19,8 +19,12 @@ class Frida_Server(DataStore):
             hook_code = f.read()
 
         # 连接到设备
-        self.device = frida.get_usb_device()  # 通过USB连接设备
-        # self.device = frida.get_device_manager().add_remote_device('192.168.50.171:16384')
+        try:
+            self.device = frida.get_usb_device()
+        except frida.InvalidArgumentError:
+            os.system('adb connect 192.168.50.171:16384')
+
+        self.device = frida.get_usb_device()
         AppBrandUI_pid = tools.get_pid(self.device.id, 'com.tencent.mm/.plugin.appbrand.ui.AppBrandUI')
         if not AppBrandUI_pid:
             raise Exception('微信小程序未打开? Pid未能搜索到')
