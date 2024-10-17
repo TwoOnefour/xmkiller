@@ -68,24 +68,20 @@ class Checkout:
         return require_fields
 
     def check_require_fields(self, service_id): # 'service_id': { "xxx": "xxx" } 用于对应service_id签到的数据
+        require_json_data = {}
         if os.path.exists("require_fields.json"):
-            rewrite_flag = False
             with open("require_fields.json", "r") as f:
                 require_json_data = json.load(f)
                 if service_id in require_json_data:
                     return require_json_data[service_id]
-                else:
-                    rewrite_flag = True
-            if rewrite_flag:
-                require_fields = self.list_service_records(service_id)
-                with open("require_fields.json", "w") as f:
-                    json.dump({service_id: require_fields}, f)
-                return require_fields
-        else:
-            require_fields = self.list_service_records(service_id)
-            with open("require_fields.json", "w") as f:
-                json.dump({service_id: require_fields}, f)
-            return require_fields
+
+
+
+        require_fields = self.list_service_records(service_id)
+        require_json_data[service_id] = require_fields
+        with open("require_fields.json", "w") as f:
+            json.dump(require_json_data, f)
+        return require_fields
 
     def checkout(self, service_id, require_fields):
         res = self.session.post(self.base_url + self.apis["create_service_record"], params={
