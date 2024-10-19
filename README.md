@@ -22,9 +22,9 @@
 # Usage
 ## Parameter
 要自动签到，首先你得修改main.py中的相关参数,如下
-- Checkout.py里GetCode方法中的`appid`
 - Checkout.py里service_record，这是传递的打卡项目的参数，修改为你想要的
 - 手机连接电脑或者打开mumu模拟器的adb，在main.py中修改ip和端口
+
 ## Run
 ```
 .\.venv\Scripts\activate
