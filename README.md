@@ -31,6 +31,6 @@
 python main.py
 ```
 
-# Preference
+# Reference
 [Hook_WeCHat_FaaS](https://github.com/FourTwooo/Hook_WeChat_FaaS)
 
